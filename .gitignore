@@ -1,0 +1,45 @@
+# Environment & Secrets
+.env
+*.env.local
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+*.egg-info/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Node / Frontend
+frontend/node_modules/
+frontend/dist/
+node_modules/
+dist/
+
+# Large FAISS cache / binaries (rebuilt on startup or locally)
+*.npy
+*.index
+*.pkl
+backend/data/faiss_cache*/
+backend/data/multilingual_index_bundle/
+backend/data/chunks_stream/
+benchmarks/experiments/cache/
+
+# OS / Editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# context files
+handoff.md
+HANDOFF.md
+benchmarks/
+backend/tests/
+backend/scripts/
+ragawaz_/
+resources/

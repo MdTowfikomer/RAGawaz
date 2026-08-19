@@ -1,0 +1,31 @@
+name: Sync to Hugging Face Space
+
+on:
+  push:
+    branches: [main, master]
+  workflow_dispatch:
+
+jobs:
+  sync-to-huggingface:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          lfs: true
+
+      - name: Push to Hugging Face Spaces
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+          HF_SPACE_NAME: ${{ secrets.HF_SPACE_NAME }}
+        run: |
+          if [ -z "$HF_TOKEN" ]; then
+            echo "Error: HF_TOKEN secret is not set in GitHub repository secrets."
+            exit 1
+          fi
+          if [ -z "$HF_SPACE_NAME" ]; then
+            echo "Error: HF_SPACE_NAME secret is not set (e.g. username/indic-voice-rag)."
+            exit 1
+          fi
+          git push --force https://oauth2:${HF_TOKEN}@huggingface.co/spaces/${HF_SPACE_NAME} HEAD:main

@@ -1,0 +1,233 @@
+{
+  "timestamp": 1786734422.6945307,
+  "sample_count": 20,
+  "metrics": {
+    "p50_ms": 1978.0766499989113,
+    "p70_ms": 2026.9963900009316,
+    "p95_ms": 2120.178199998554,
+    "max_ms": 2240.094799999497,
+    "word_accuracy_pct": 78.97619047619048
+  },
+  "records": [
+    {
+      "query_id": 8000,
+      "audio_file": "sample_audio_01.wav",
+      "mode": "websocket_streaming",
+      "expected": "भारत का राष्ट्रीय पक्षी कौन सा है?",
+      "transcript": "भारत का राष्ट्रीय पक्षी कौन सा है,",
+      "accuracy_overlap": 0.8571428571428571,
+      "first_partial_ms": 589.1296999980113,
+      "final_transcript_ms": 2088.3467999992718,
+      "total_stt_ms": 2113.8667999985046
+    },
+    {
+      "query_id": 8001,
+      "audio_file": "sample_audio_02.wav",
+      "mode": "websocket_streaming",
+      "expected": "कंप्यूटर की प्राथमिक मेमोरी क्या होती है?",
+      "transcript": "कंप्यूटर की प्राथमिक मेमोरी क्या होती",
+      "accuracy_overlap": 0.8571428571428571,
+      "first_partial_ms": 662.4299000031897,
+      "final_transcript_ms": 2012.1697000031418,
+      "total_stt_ms": 2032.883200001379
+    },
+    {
+      "query_id": 8002,
+      "audio_file": "sample_audio_03.wav",
+      "mode": "websocket_streaming",
+      "expected": "सौर मंडल का सबसे बड़ा ग्रह कौन सा है?",
+      "transcript": "सौर मंडल का सबसे बड़ा ग्रह कौन सा",
+      "accuracy_overlap": 0.8888888888888888,
+      "first_partial_ms": 447.60999999925843,
+      "final_transcript_ms": 1963.6924999977055,
+      "total_stt_ms": 2028.2264999987092
+    },
+    {
+      "query_id": 8003,
+      "audio_file": "sample_audio_04.wav",
+      "mode": "websocket_streaming",
+      "expected": "ताजमहल किस नदी के किनारे स्थित है?",
+      "transcript": "ताजमहल किस नदी के किनारे स्थित है?",
+      "accuracy_overlap": 1.0,
+      "first_partial_ms": 838.6353999994753,
+      "final_transcript_ms": 1973.2016999987536,
+      "total_stt_ms": 2000.2619000006234
+    },
+    {
+      "query_id": 8004,
+      "audio_file": "sample_audio_05.wav",
+      "mode": "websocket_streaming",
+      "expected": "मानव शरीर में कुल कितनी हड्डियां होती हैं?",
+      "transcript": "मानव शरीर में कुल कितनी हड्डियाँ होती",
+      "accuracy_overlap": 0.75,
+      "first_partial_ms": 411.5903999991133,
+      "final_transcript_ms": 1946.6958999983035,
+      "total_stt_ms": 1967.376599997806
+    },
+    {
+      "query_id": 8005,
+      "audio_file": "sample_audio_06.wav",
+      "mode": "websocket_streaming",
+      "expected": "भारतीय संविधान के जनक कौन हैं?",
+      "transcript": "भारतीय संविधान के जनक",
+      "accuracy_overlap": 0.6666666666666666,
+      "first_partial_ms": 382.64170000184095,
+      "final_transcript_ms": 1633.649899999,
+      "total_stt_ms": 1656.1417000011716
+    },
+    {
+      "query_id": 8006,
+      "audio_file": "sample_audio_07.wav",
+      "mode": "websocket_streaming",
+      "expected": "प्रकाश वर्ष किसका मात्रक है?",
+      "transcript": "प्रकाश वर्ष किसका मात्रा",
+      "accuracy_overlap": 0.6,
+      "first_partial_ms": 421.1400999993202,
+      "final_transcript_ms": 1671.29980000027,
+      "total_stt_ms": 1697.6482999998552
+    },
+    {
+      "query_id": 8007,
+      "audio_file": "sample_audio_08.wav",
+      "mode": "websocket_streaming",
+      "expected": "पानी का रासायनिक सूत्र क्या है?",
+      "transcript": "पानी का रासायनिक सूत्र",
+      "accuracy_overlap": 0.6666666666666666,
+      "first_partial_ms": 482.3257000025478,
+      "final_transcript_ms": 1734.7012000027462,
+      "total_stt_ms": 1757.6062000007369
+    },
+    {
+      "query_id": 8008,
+      "audio_file": "sample_audio_09.wav",
+      "mode": "websocket_streaming",
+      "expected": "भारत के पहले प्रधानमंत्री कौन थे?",
+      "transcript": "भारत के पहले प्रधानमंत्री कौन थे,",
+      "accuracy_overlap": 0.8333333333333334,
+      "first_partial_ms": 490.8971000004385,
+      "final_transcript_ms": 2013.1226999983483,
+      "total_stt_ms": 2035.3433999989647
+    },
+    {
+      "query_id": 8009,
+      "audio_file": "sample_audio_10.wav",
+      "mode": "websocket_streaming",
+      "expected": "पृथ्वी अपनी धुरी पर किस दिशा में घूमती है?",
+      "transcript": "पृथ्वी अपनी धुरी पर किस दिशा में घूम",
+      "accuracy_overlap": 0.7777777777777778,
+      "first_partial_ms": 452.07090000258177,
+      "final_transcript_ms": 1998.0943000009574,
+      "total_stt_ms": 2026.469200001884
+    },
+    {
+      "query_id": 8010,
+      "audio_file": "sample_audio_11.wav",
+      "mode": "websocket_streaming",
+      "expected": "भारत का राष्ट्रीय पक्षी कौन सा है?",
+      "transcript": "भारत का राष्ट्रीय पक्षी कौन सा है,",
+      "accuracy_overlap": 0.8571428571428571,
+      "first_partial_ms": 496.2821000008262,
+      "final_transcript_ms": 1968.2284000009531,
+      "total_stt_ms": 1988.7767000000167
+    },
+    {
+      "query_id": 8011,
+      "audio_file": "sample_audio_12.wav",
+      "mode": "websocket_streaming",
+      "expected": "कंप्यूटर की प्राथमिक मेमोरी क्या होती है?",
+      "transcript": "कंप्यूटर की प्राथमिक मेमोरी क्या होती",
+      "accuracy_overlap": 0.8571428571428571,
+      "first_partial_ms": 428.1282999982068,
+      "final_transcript_ms": 1957.5170999996772,
+      "total_stt_ms": 2014.2175000000861
+    },
+    {
+      "query_id": 8012,
+      "audio_file": "sample_audio_13.wav",
+      "mode": "websocket_streaming",
+      "expected": "सौर मंडल का सबसे बड़ा ग्रह कौन सा है?",
+      "transcript": "सौर मंडल का सबसे बड़ा ग्रह कौन सा",
+      "accuracy_overlap": 0.8888888888888888,
+      "first_partial_ms": 485.48270000173943,
+      "final_transcript_ms": 2007.2559000000183,
+      "total_stt_ms": 2032.5878000003286
+    },
+    {
+      "query_id": 8013,
+      "audio_file": "sample_audio_14.wav",
+      "mode": "websocket_streaming",
+      "expected": "ताजमहल किस नदी के किनारे स्थित है?",
+      "transcript": "ताजमहल किस नदी के किनारे स्थित है?",
+      "accuracy_overlap": 1.0,
+      "first_partial_ms": 416.9949999995879,
+      "final_transcript_ms": 1945.6661000003805,
+      "total_stt_ms": 1967.0681999996305
+    },
+    {
+      "query_id": 8014,
+      "audio_file": "sample_audio_15.wav",
+      "mode": "websocket_streaming",
+      "expected": "मानव शरीर में कुल कितनी हड्डियां होती हैं?",
+      "transcript": "मानव शरीर में कुल कितनी हड्डियाँ होती",
+      "accuracy_overlap": 0.75,
+      "first_partial_ms": 405.11590000096476,
+      "final_transcript_ms": 1939.0893999989203,
+      "total_stt_ms": 1960.7011000007333
+    },
+    {
+      "query_id": 8015,
+      "audio_file": "sample_audio_16.wav",
+      "mode": "websocket_streaming",
+      "expected": "भारतीय संविधान के जनक कौन हैं?",
+      "transcript": "भारतीय संविधान के जनक",
+      "accuracy_overlap": 0.6666666666666666,
+      "first_partial_ms": 499.7970999975223,
+      "final_transcript_ms": 1703.954699998576,
+      "total_stt_ms": 1724.7396999991906
+    },
+    {
+      "query_id": 8016,
+      "audio_file": "sample_audio_17.wav",
+      "mode": "websocket_streaming",
+      "expected": "प्रकाश वर्ष किसका मात्रक है?",
+      "transcript": "प्रकाश वर्ष किसका मात्रा",
+      "accuracy_overlap": 0.6,
+      "first_partial_ms": 413.4801000000152,
+      "final_transcript_ms": 1681.121500001609,
+      "total_stt_ms": 1713.8475000028848
+    },
+    {
+      "query_id": 8017,
+      "audio_file": "sample_audio_18.wav",
+      "mode": "websocket_streaming",
+      "expected": "पानी का रासायनिक सूत्र क्या है?",
+      "transcript": "पानी का रासायनिक सूत्र",
+      "accuracy_overlap": 0.6666666666666666,
+      "first_partial_ms": 395.26549999936833,
+      "final_transcript_ms": 1653.383999997459,
+      "total_stt_ms": 1678.617599998688
+    },
+    {
+      "query_id": 8018,
+      "audio_file": "sample_audio_19.wav",
+      "mode": "websocket_streaming",
+      "expected": "भारत के पहले प्रधानमंत्री कौन थे?",
+      "transcript": "भारत के पहले प्रधानमंत्री कौन थे,",
+      "accuracy_overlap": 0.8333333333333334,
+      "first_partial_ms": 418.28829999940353,
+      "final_transcript_ms": 1906.25,
+      "total_stt_ms": 1939.949899999192
+    },
+    {
+      "query_id": 8019,
+      "audio_file": "sample_audio_20.wav",
+      "mode": "websocket_streaming",
+      "expected": "पृथ्वी अपनी धुरी पर किस दिशा में घूमती है?",
+      "transcript": "पृथ्वी अपनी धुरी पर किस दिशा में घूम",
+      "accuracy_overlap": 0.7777777777777778,
+      "first_partial_ms": 490.3139999987616,
+      "final_transcript_ms": 2107.2684999999183,
+      "total_stt_ms": 2240.094799999497
+    }
+  ]
+}

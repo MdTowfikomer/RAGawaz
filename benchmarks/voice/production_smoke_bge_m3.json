@@ -1,0 +1,112 @@
+[
+  {
+    "name": "QID 1060361 (Barter)",
+    "query": "वस्तु विनिमय में पहला क्या था",
+    "gold_pid": "hi_1060361_3",
+    "gold_rank": null,
+    "status": "refusal_insufficient_evidence",
+    "top_score": 0.5457,
+    "retrieval_ms": 277.77,
+    "e2e_ms": 614.31,
+    "answer": "दिए गए संदर्भ में इस प्रश्न का सटीक और विश्वसनीय उत्तर उपलब्ध नहीं है।"
+  },
+  {
+    "name": "Rachel Carson / Obligation to Endure",
+    "query": "रेचल कार्सन ने क्यों एक दायित्व बर्दाश्त करने के लिए लिखा",
+    "gold_pid": "hi_1102431_4",
+    "gold_rank": null,
+    "status": "success",
+    "top_score": 0.5976,
+    "retrieval_ms": 58.28,
+    "e2e_ms": 218.17,
+    "answer": "कार्सन ने इसे ठीक लेखन तकनीक में लिखने के लिए सूक्ष्म रूप से स्थगित कर दिया ताकि यह अनियंत्रित शैली के अधीन न हो, जो पूर..."
+  },
+  {
+    "name": "Cantaloupe / Cucumber Mismatch",
+    "query": "कैंटालूप को कितने समय तक परिपक्व होना है",
+    "gold_pid": "hi_1081829_0",
+    "gold_rank": null,
+    "status": "success",
+    "top_score": 0.5755,
+    "retrieval_ms": 43.11,
+    "e2e_ms": 347.13,
+    "answer": "कैंटालूप फल देने में आमतौर पर परागण के 35 दिनों के भीतर परिपक्व हो जाता है।"
+  },
+  {
+    "name": "Basal DNA",
+    "query": "बेसल डीएनए क्या है?",
+    "gold_pid": "hi_1066765_0",
+    "gold_rank": null,
+    "status": "success",
+    "top_score": 0.5725,
+    "retrieval_ms": 37.52,
+    "e2e_ms": 197.58,
+    "answer": "न्यूइड बेसल-सेल कार्सिनोमा सिंड्रोम (एन.बी.सी.सी.एस.), जिसे बेसल-सेल नेवस सिंड्रोम, मल्टीपल बेसल-सेल कार्सिनोमा सिंड्रोम..."
+  },
+  {
+    "name": "Arbitrary",
+    "query": "मनमाना का क्या अर्थ है?",
+    "gold_pid": "hi_1052843_0",
+    "gold_rank": null,
+    "status": "success",
+    "top_score": 0.6927,
+    "retrieval_ms": 43.46,
+    "e2e_ms": 501.89,
+    "answer": "मनमाना शब्द एक ऐसे कार्य या निर्णय का वर्णन करता है जो तर्क या निर्णय पर आधारित नहीं है, बल्कि नियमों या मानकों की परवाह..."
+  },
+  {
+    "name": "English -> Hindi (Corporation)",
+    "query": "What is a corporation?",
+    "gold_pid": "hi_1048528_0",
+    "gold_rank": null,
+    "status": "success",
+    "top_score": 0.6524,
+    "retrieval_ms": 16.89,
+    "e2e_ms": 256.35,
+    "answer": "जिसे बॉडी कॉर्पोरेट भी कहा जाता है। लोगों का एक समूह जो एक निगम में संयुक्त हो जाता है या एक निगम के रूप में कार्य करता ..."
+  },
+  {
+    "name": "Hinglish -> Hindi (Rachel Carson)",
+    "query": "Rachel Carson ne Obligation to Endure kyu likha tha?",
+    "gold_pid": "hi_1102431_4",
+    "gold_rank": null,
+    "status": "refusal_ungrounded",
+    "top_score": 0.5087,
+    "retrieval_ms": 35.53,
+    "e2e_ms": 217.73,
+    "answer": "दिए गए संदर्भ में इस प्रश्न का सटीक और विश्वसनीय उत्तर उपलब्ध नहीं है।"
+  },
+  {
+    "name": "Marathi -> Hindi (Honesty)",
+    "query": "प्रामाणिकपणा किंवा सत्याची व्याख्या काय आहे?",
+    "gold_pid": "hi_1047648_0",
+    "gold_rank": null,
+    "status": "success",
+    "top_score": 0.6208,
+    "retrieval_ms": 32.73,
+    "e2e_ms": 263.16,
+    "answer": "ानदारी को किसी के कार्यों की ईमानदारी और सत्यता या सटीकता के रूप में माना जाता है।"
+  },
+  {
+    "name": "Tamil -> Hindi (Falcon Speed)",
+    "query": "பால்கன் பறவை எவ்வளவு வேகமாக பறக்கும்?",
+    "gold_pid": "hi_1079313_0",
+    "gold_rank": null,
+    "status": "refusal_insufficient_evidence",
+    "top_score": 0.5774,
+    "retrieval_ms": 47.17,
+    "e2e_ms": 287.19,
+    "answer": "दिए गए संदर्भ में इस प्रश्न का सटीक और विश्वसनीय उत्तर उपलब्ध नहीं है।"
+  },
+  {
+    "name": "Bengali -> Hindi (Corporation)",
+    "query": "কর্পোরেশন কি?",
+    "gold_pid": "hi_1048528_0",
+    "gold_rank": null,
+    "status": "refusal_insufficient_evidence",
+    "top_score": 0.6355,
+    "retrieval_ms": 28.87,
+    "e2e_ms": 214.88,
+    "answer": "दिए गए संदर्भ में इस प्रश्न का सटीक और विश्वसनीय उत्तर उपलब्ध नहीं है।"
+  }
+]

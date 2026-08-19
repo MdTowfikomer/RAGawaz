@@ -14,11 +14,14 @@ Optimizations:
 from typing import List, Dict, Any, Optional
 from concurrent.futures import ThreadPoolExecutor, Future
 import time
+import atexit
 from backend.app.rag.retriever import FAISSHNSWRetriever, RetrievedChunk
 from backend.app.rag.bm25_retriever import BM25Retriever
 
 # Module-level thread pool for reuse across searches (2 threads: FAISS + BM25)
 _retrieval_executor = ThreadPoolExecutor(max_workers=2, thread_name_prefix="hybrid_retrieval")
+atexit.register(lambda: _retrieval_executor.shutdown(wait=False))
+
 
 
 class HybridRetriever:

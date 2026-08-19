@@ -27,6 +27,7 @@ export default function App() {
     systemHealth,
     benchmarkData,
     toggleRecording,
+    stopRecording,
     executeQuery,
   } = useVoiceRAG();
 
@@ -66,6 +67,8 @@ export default function App() {
               groundednessScore={groundednessScore}
               retrievedChunks={retrievedChunks}
               executeQuery={executeQuery}
+              toggleRecording={toggleRecording}
+              stopRecording={stopRecording}
             />
 
             {/* Zone 2: Minimalist Voice Agent Hero */}

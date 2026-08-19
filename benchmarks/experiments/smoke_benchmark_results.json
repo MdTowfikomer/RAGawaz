@@ -1,0 +1,55 @@
+{
+  "gpu_name": "NVIDIA GeForce RTX 3050 6GB Laptop GPU",
+  "total_vram_gb": 5.99951171875,
+  "all_passed": true,
+  "results": [
+    {
+      "key": "minilm",
+      "name": "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
+      "device": "cuda:0",
+      "expected_dimension": 384,
+      "actual_dimension": 384,
+      "dimension_valid": true,
+      "normalized": true,
+      "load_time_s": 13.9713220000001,
+      "batch_100_ms": 882.4210000000221,
+      "peak_vram_mb": 472.736328125,
+      "query_latency_p50_ms": 29.390599999942424,
+      "query_latency_p70_ms": 39.413560000048165,
+      "query_latency_p95_ms": 45.93705999997155,
+      "passed": true
+    },
+    {
+      "key": "bge_m3",
+      "name": "BAAI/bge-m3",
+      "device": "cuda:0",
+      "expected_dimension": 1024,
+      "actual_dimension": 1024,
+      "dimension_valid": true,
+      "normalized": true,
+      "load_time_s": 290.27609270000016,
+      "batch_100_ms": 1080.4661000001943,
+      "peak_vram_mb": 2210.728515625,
+      "query_latency_p50_ms": 32.183749999944666,
+      "query_latency_p70_ms": 32.93857000001026,
+      "query_latency_p95_ms": 35.18195999992031,
+      "passed": true
+    },
+    {
+      "key": "e5_large",
+      "name": "intfloat/multilingual-e5-large",
+      "device": "cuda:0",
+      "expected_dimension": 1024,
+      "actual_dimension": 1024,
+      "dimension_valid": true,
+      "normalized": true,
+      "load_time_s": 378.9452732,
+      "batch_100_ms": 1001.5292000002773,
+      "peak_vram_mb": 2181.8662109375,
+      "query_latency_p50_ms": 55.46245000005001,
+      "query_latency_p70_ms": 87.29877000014312,
+      "query_latency_p95_ms": 101.1677799999461,
+      "passed": true
+    }
+  ]
+}

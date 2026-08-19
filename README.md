@@ -1,218 +1,435 @@
----
-title: Indic Voice RAG
-emoji: 🎙️
-colorFrom: green
-colorTo: emerald
-sdk: gradio
-sdk_version: 4.20.0
-app_file: app.py
-app_port: 7860
-pinned: false
-license: mit
----
+# RAGawaz
 
-<div align="center">
+RAGawaz is a multilingual voice retrieval-augmented generation application for Indic and English questions. It combines browser voice capture, multilingual speech-to-text, BAAI/bge-m3 embeddings, in-memory FAISS-HNSW and BM25 retrieval, defensive guardrails, streaming LLM answers, groundedness verification, and optional Indic text-to-speech.
 
-# 🎙️ Indic Voice RAG
-### High-Performance, Low-Latency Multilingual Voice Knowledge Engine with 5-Tier Defensive Guardrails
+The frontend is a Vite React application. The backend is a FastAPI service that loads the configured index once at startup and exposes text, streaming, voice, health, and benchmark endpoints.
 
-[![FastAPI](https://img.shields.io/badge/FastAPI-0.110.0-009688.svg?logo=fastapi&logoColor=white)](https://fastapi.tiangolo.com)
-[![FAISS](https://img.shields.io/badge/FAISS-HNSW%20(M%3D32)-blue.svg?logo=meta&logoColor=white)](https://github.com/facebookresearch/faiss)
-[![BGE-M3](https://img.shields.io/badge/BAAI-BGE--M3%20(1024d)-orange.svg)](https://huggingface.co/BAAI/bge-m3)
-[![Groq LPU](https://img.shields.io/badge/Groq-LPU%20Streaming-f55036.svg)](https://groq.com)
-[![Sarvam AI](https://img.shields.io/badge/Sarvam%20AI-Indic%20STT%2FTTS-7C3AED.svg)](https://sarvam.ai)
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+## Key features
 
-</div>
+- Voice input with browser interim transcription and backend multilingual STT.
+- Support for English, Hindi, Hinglish, Marathi, Tamil, Bengali, and additional Indic languages in the indexed corpus.
+- Production embedding profile: **BAAI/bge-m3**, 1024 dimensions.
+- Hybrid retrieval using FAISS-HNSW dense search plus BM25 sparse search and reciprocal-rank fusion.
+- 301,108-vector multilingual corpus bundle when the production index is available.
+- Safety, relevance, evidence-sufficiency, and groundedness guardrails.
+- Server-sent event (SSE) streaming for low time-to-first-token responses.
+- Groq, Cerebras, Sarvam, and mock LLM provider support.
+- Sarvam Indic STT/TTS with Groq Whisper fallback.
+- Benchmark dashboard backed by saved reports under `benchmarks/`.
+- Responsive mobile conversation UI and desktop telemetry dashboard.
 
----
+## Tech stack
 
-## 🏆 Hackathon Task 2 (HH Goa) — Requirements & Compliance Matrix
+| Area | Technology |
+| --- | --- |
+| Frontend | React 18, Vite, plain CSS, lucide-react |
+| Backend | Python 3.11+, FastAPI, Uvicorn |
+| Embeddings | `BAAI/bge-m3` via sentence-transformers |
+| Dense retrieval | FAISS `IndexHNSWFlat`, inner-product/cosine search |
+| Sparse retrieval | Custom BM25-WAND retriever |
+| LLM providers | Groq, Cerebras, Sarvam, mock fallback |
+| Voice | Browser SpeechRecognition, MediaRecorder, Sarvam STT/TTS, Groq Whisper |
+| Data/index storage | Local FAISS and pickle bundles |
+| Testing | Backend tests and benchmark-specific Python runners |
 
-This project was built to strictly satisfy and exceed the **Task 2 Problem Statement & Evaluation Criteria** ([`resources/task 2_ hhg.pdf`](resources/task%202_%20hhg.pdf)):
+## Prerequisites
 
-| Task 2 Requirement | Specification Requirement | Our Implementation & Status | File Reference |
-|---|---|---|---|
-| **1. Dataset Scoping & Ingestion** | Ingest, flatten, and index `ai4bharat/MSMARCO-XI` dataset with deduplication. | **301,108 chunks** indexed across 14 Indic languages with streaming SHA-256 deduplication. | [`stream_ingest.py`](backend/app/rag/stream_ingest.py) |
-| **2. Multi-Strategy Chunking** | Benchmark at least 4 distinct chunking strategies with recall/latency trade-offs. | Evaluated **Fixed+Overlap**, **Semantic Danda (`।`)**, **Parent-Child**, and **Adaptive Structure-Aware**. | [`chunker.py`](backend/app/rag/chunker.py) |
-| **3. High-Speed Local Retrieval** | Sub-50ms vector search on embedded corpus. | `faiss.IndexHNSWFlat` ($M=32$) runs in **$0.91\text{ ms}$**; Combined Embed+Retrieval is **$16.45\text{ ms}$ P70**. | [`retriever.py`](backend/app/rag/retriever.py) |
-| **4. Voice Pipeline Integration** | Speech-to-Text with Indic language identification & streaming support. | **Sarvam AI `saaras:v3`** (Indic native) + **Groq Whisper `whisper-large-v3-turbo`** fallback. | [`pipeline.py`](backend/app/voice/pipeline.py) |
-| **5. Custom RAG Harness** | Purpose-built orchestration, strict context grounding, and prompt defense. | Language-adaptive system prompts, circuit breakers, and streaming event generators. | [`orchestrator.py`](backend/app/harness/orchestrator.py) |
-| **6. Multi-Tier Guardrails** | Must know *when NOT to answer* (off-topic, safety, ungroundedness). | Active **5-layer pipeline**: Safety ($< 1\text{ms}$), Relevance ($< 16\text{ms}$), Pre-LLM Evidence Gate, Groundedness Verifier. | [`guardrails/`](backend/app/guardrails/) |
-| **7. Glass-Box Observability** | Report discrete P50/P70/P100 latency distributions across all pipeline stages. | Live telemetry dashboard reporting `embed_retrieval_ms`, `llm_ttft_ms`, and `text_to_answer_ms`. | [`PerformanceTelemetry.jsx`](frontend/src/components/PerformanceTelemetry.jsx) |
+- Python 3.11 or newer.
+- Node.js 18 or newer and npm.
+- Git.
+- A microphone and a browser supporting `getUserMedia`; Chrome/Edge generally provide the best SpeechRecognition support.
+- Optional API keys:
+  - Groq for low-latency LLM and Whisper.
+  - Sarvam for Indic STT/TTS and optional LLM.
+  - Cerebras for the Cerebras provider.
+- Enough RAM for the selected local index. The full BGE-M3/BM25 bundle is substantially larger than the lightweight starter corpus.
 
----
+## Project structure
 
-## 🏗️ System Architecture
-
-```mermaid
-flowchart TD
-    UserVoice([User Spoken Voice / Microphone]) --> STT[1. Multilingual STT<br>Sarvam saaras:v3 / Groq Whisper]
-    STT --> ScriptDet[Language & Script Identification<br>Hindi, English, Hinglish, Marathi, Tamil, Bengali]
-    
-    ScriptDet --> Guard1{2. Safety Guardrail<br>&lt; 1ms Policy & Injection Check}
-    Guard1 -- Malicious / Unsafe --> Refusal1[Refusal: Safety Policy]
-    
-    Guard1 -- Safe Query --> HybridRet[3. Hybrid In-Memory Retrieval]
-    
-    subgraph RetrievalEngine [High-Throughput In-Memory Engine (301k Chunks)]
-        HybridRet --> Dense[Dense FAISS-HNSW<br>BGE-M3 1024-d / ~0.91ms]
-        HybridRet --> Sparse[Sparse BM25 Search<br>617k Unique Terms / ~22ms]
-        Dense --> RRF[RRF Rank Fusion<br>k=60 / ~0.11ms]
-        Sparse --> RRF
-    end
-    
-    RRF --> Guard2{4. Relevance Gate<br>Cosine &gt; 0.25 & Intent Match}
-    Guard2 -- Off-Topic --> Refusal2[Refusal: Out-of-Domain]
-    
-    Guard2 -- Top Chunks --> Guard3{5. Evidence Sufficiency Gate<br>Pre-LLM Entity Match & Score &gt; 0.38}
-    Guard3 -- Insufficient Evidence --> Refusal3[Refusal: Insufficient Evidence<br>Skips LLM, Saves ~150ms]
-    
-    Guard3 -- Sufficient Context --> LLM[6. Language-Adaptive LLM Stream<br>Groq Llama-3.3-70b Versatile]
-    LLM --> Guard4{7. Groundedness Verifier<br>Numeric &amp; Content Faithfulness}
-    
-    Guard4 -- Fabricated Facts / Drift --> Refusal4[Refusal: Ungrounded Overwrite]
-    Guard4 -- 100% Verified --> AudioOut([8. Verified Answer + Audio Stream])
+```text
+.
+├── app.py                         # Index preparation and Uvicorn startup
+├── Dockerfile                     # Container definition
+├── railway.json                   # Service configuration
+├── requirements.txt               # Backend Python dependencies
+├── .env.example                   # Backend environment template
+├── backend/
+│   ├── app/
+│   │   ├── main.py                # FastAPI app, startup, routes, static serving
+│   │   ├── config.py              # Embedding, guardrail, and latency configuration
+│   │   ├── rag/                   # Embedding, FAISS, BM25, hybrid retrieval, ingestion
+│   │   ├── guardrails/            # Safety, relevance, evidence, groundedness checks
+│   │   ├── harness/               # RAG orchestration and LLM provider adapters
+│   │   └── voice/                 # Language detection and STT/TTS pipeline
+│   ├── data/                      # Local index/corpus artifacts when present
+│   ├── requirements.txt           # Minimal benchmark requirements
+│   └── tests/                     # Backend tests
+├── frontend/
+│   ├── src/
+│   │   ├── App.jsx                # Main voice/benchmark views
+│   │   ├── hooks/useVoiceRAG.js   # Recording, STT, SSE, and state machine
+│   │   ├── components/            # Conversation, voice, telemetry, benchmark UI
+│   │   └── index.css              # Responsive design system
+│   ├── package.json
+│   ├── vite.config.js
+│   └── .env.example
+├── benchmarks/
+│   ├── benchmark_results.json     # Final stratified summary
+│   ├── final_benchmark_report.json
+│   ├── experiments/               # Retrieval, latency, multilingual reports
+│   ├── phase_a/                   # Deterministic pre-LLM benchmark
+│   ├── voice/                     # Voice/STT/retrieval validation
+│   └── datasets/                  # Dataset generation utilities
+├── resources/                     # Task/reference resources
+└── .github/workflows/             # Repository automation
 ```
 
----
+## Getting started locally
 
-## ⚡ Latency Budget & Empirical Measurements
-
-Tested across the **135-query stratified evaluation dataset** on the 301,108-chunk corpus:
-
-| Pipeline Boundary | Technology / Provider | P50 Latency | P70 Target | Compliance Target | Status |
-|---|---|---|---|---|---|
-| **Query Embedding** | `BAAI/bge-m3` (CUDA FP16 / Warmed) | **11.38 ms** | 14.5 ms | $< 25\text{ ms}$ | ✅ **PASS** |
-| **Vector DB Search** | `faiss.IndexHNSWFlat` ($M=32, ef=64$) | **0.91 ms** | 1.25 ms | $< 10\text{ ms}$ | ✅ **PASS** |
-| **Sparse Keyword Search** | `BM25Retriever` (617,865 terms) | **22.11 ms** | 24.5 ms | $< 35\text{ ms}$ | ✅ **PASS** |
-| **Rank Fusion (RRF)** | Reciprocal Rank Fusion ($k=60$) | **0.11 ms** | 0.15 ms | $< 1\text{ ms}$ | ✅ **PASS** |
-| **Pre-LLM Boundary** | **Safety + Embed + Hybrid Search + Gate** | **$\mathbf{166.6\text{ ms}}$** | **$\mathbf{185.0\text{ ms}}$** | $\mathbf{< 200\text{ ms}}$ | ✅ **PASS** |
-| **LLM TTFT (First Token)** | Groq LPU (`llama-3.3-70b-versatile`) | **120.0 ms** | 150.0 ms | $< 250\text{ ms}$ | ✅ **PASS** |
-| **Pre-LLM Refusal Intercept** | `EvidenceGate` / `SafetyGuardrail` | **15.07 ms** | 17.03 ms | $< 25\text{ ms}$ | ✅ **PASS** |
-
----
-
-## 🛡️ The 5-Layer Defensive Guardrail Pipeline
-
-The harness prioritizes **knowing when NOT to answer**:
-
-1. **Safety Guardrail ([`safety.py`](backend/app/guardrails/safety.py)):** Sub-millisecond ($< 0.1\text{ ms}$) regex scan for jailbreaks, prompt injection, and harmful instructions in Latin and Indic scripts.
-2. **Relevance Gate ([`relevance.py`](backend/app/guardrails/relevance.py)):** Rejects off-topic conversational or transactional intents (weather, flight booking, live stocks) with a calibrated $0.25$ cosine cutoff.
-3. **Evidence Sufficiency Interceptor ([`evidence_gate.py`](backend/app/guardrails/evidence_gate.py)):** Pre-LLM check evaluating whether named query entities actually exist inside retrieved passages. Short-circuits unanswerable queries in $< 18\text{ ms}$, saving 150ms of LLM generation time and preventing hallucinations.
-4. **Strict Grounded Prompting:** Language-adaptive system instructions enforcing strict adherence to retrieved text spans.
-5. **Groundedness Verifier ([`groundedness.py`](backend/app/guardrails/groundedness.py)):** Post-generation verification checking numeric veracity ($\text{numbers}_{\text{ans}} \subseteq \text{numbers}_{\text{ctx}}$), non-stopword content keyword support ($\ge 15\%$), and loop degeneration suppression.
-
----
-
-## 🌐 Multilingual Evaluation Matrix (301,108 Chunks)
-
-Evaluated on stratified multilingual benchmarks:
-
-| Language | Sample Count | Recall@5 | MRR | Avg Cosine Similarity |
-|---|---|---|---|---|
-| **Hindi (`hi`)** | 10 queries | **90.0%** | 0.8250 | 0.6766 |
-| **English (`en`)** | 10 queries | **90.0%** | 0.9000 | 0.6181 |
-| **Hinglish (`hi-EN`)** | 10 queries | **80.0%** | 0.7250 | 0.5704 |
-| **Marathi (`mr`)** | 10 queries | **100.0%** | 1.0000 | 0.7033 |
-| **Tamil (`ta`)** | 10 queries | **90.0%** | 0.8500 | 0.6497 |
-| **Bengali (`bn`)** | 10 queries | **90.0%** | 0.9000 | 0.6521 |
-| **OVERALL GLOBAL** | **60 queries** | **$\mathbf{90.0\%}$** | **$\mathbf{0.8667}$** | **$\mathbf{0.6450}$** |
-
----
-
-## 📂 Multi-Strategy Chunking Suite
-
-Implemented in [`backend/app/rag/chunker.py`](backend/app/rag/chunker.py) & [`minimal_chunker.py`](backend/app/rag/minimal_chunker.py):
-
-* **Sentence-Aware Minimal-Context (Active Production):** 180–220 characters (250 char hard cap, ~35–45 words / 1–2 Devanagari sentences) respecting Indic punctuation (`।`, `?`, `!`, `\n`) and word boundaries.
-* **Fixed + Overlap:** 250-character window with 50-character sliding overlap.
-* **Semantic Devanagari Splitting:** Groups sentence units up to 300 characters via Devanagari danda (`।`).
-* **Parent-Child Hierarchical:** 100-character micro-child vector matching linked to 500-character macro-parent LLM context.
-* **Adaptive Structure-Aware:** Dynamic density-aware splitting based on paragraph length.
-
----
-
-## 💻 Quickstart & Deployment
-
-### 1. Environment Configuration
-
-Create a `.env` file in the root directory:
-
-```env
-# API Keys
-GROQ_API_KEY=gsk_your_groq_api_key_here
-SARVAM_API_KEY=your_sarvam_api_key_here
-
-# Server Settings
-FASTAPI_HOST=0.0.0.0
-FASTAPI_PORT=7860
-EMBEDDING_PROFILE=bge_m3
-```
-
-### 2. Local Setup
+### 1. Clone the repository
 
 ```bash
-# 1. Install backend requirements
-python -m venv .venv
-source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-pip install -r backend/requirements.txt
+git clone https://github.com/MdTowfikomer/RAGawaz.git
+cd RAGawaz
+```
 
-# 2. Build the React frontend
-cd frontend
+If the repository is checked out under a different owner or URL, use that remote instead.
+
+### 2. Create a Python environment
+
+Windows PowerShell:
+
+```powershell
+py -3.11 -m venv .venv
+.venv\Scripts\Activate.ps1
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+macOS/Linux:
+
+```bash
+python3.11 -m venv .venv
+source .venv/bin/activate
+python -m pip install --upgrade pip
+pip install -r requirements.txt
+```
+
+### 3. Configure the backend
+
+```powershell
+Copy-Item .env.example .env
+```
+
+Set at least one LLM key for real answers:
+
+```dotenv
+GROQ_API_KEY=gsk_...
+SARVAM_API_KEY=...
+LLM_PROVIDER=groq
+EMBEDDING_MODEL=bge_m3
+```
+
+The backend falls back to a mock provider if no LLM key is available. Never commit `.env` or API keys.
+
+### 4. Install frontend dependencies
+
+```powershell
+Set-Location frontend
 npm install
+```
+
+For a Vite development server pointing at a separately running backend, create `frontend/.env.local`:
+
+```dotenv
+VITE_API_BASE_URL=http://127.0.0.1:8000
+```
+
+### 5. Start the backend
+
+From the repository root:
+
+```powershell
+uvicorn backend.app.main:app --host 0.0.0.0 --port 8000
+```
+
+On startup the service loads a local FAISS/BM25 index when available. Otherwise it builds a small starter index from available local passages and warms retrieval across several languages.
+
+### 6. Start the frontend
+
+In a second terminal:
+
+```powershell
+Set-Location frontend
+npm run dev
+```
+
+Open the Vite URL printed in the terminal, normally `http://localhost:5173`.
+
+### 7. Production frontend build
+
+```powershell
+Set-Location frontend
 npm run build
-cd ..
-
-# 3. Launch unified server
-uvicorn backend.app.main:app --host 0.0.0.0 --port 7860
+npm run preview
 ```
 
-Open your browser at:
-* **Web UI Dashboard:** `http://localhost:7860`
-* **Swagger API Documentation:** `http://localhost:7860/docs`
-* **Health & Diagnostics:** `http://localhost:7860/api/health`
+The backend can also serve `frontend/dist` when the compiled directory is available in the backend root.
 
----
+## Environment variables
 
-## 🐳 Docker & Hugging Face Spaces Deployment
+### Backend
 
-This repository is pre-configured with a multi-stage Docker setup.
+| Variable | Required | Description | Default |
+| --- | --- | --- | --- |
+| `GROQ_API_KEY` | Recommended | Groq LLM and Whisper credentials | Empty |
+| `SARVAM_API_KEY` | Optional | Sarvam Indic STT/TTS credentials | Empty |
+| `CEREBRAS_API_KEY` | Optional | Cerebras provider credentials | Empty |
+| `LLM_PROVIDER` | Optional | `groq`, `cerebras`, `sarvam`, or `mock` | Auto-select Groq, otherwise mock |
+| `EMBEDDING_MODEL` | Optional | Active embedding profile; production is `bge_m3` | `bge_m3` |
+| `EMBEDDING_DIM` | Optional | Embedding dimension override | `1024` |
+| `MAX_PASSAGES` | Optional | Maximum passages when building a fallback index | `50000` |
+| `SKIP_PARENT_TEXTS` | Optional | Avoid loading parent text pickle to reduce RAM | `false` |
+| `INDEX_DATASET_REPO` | Optional | Dataset containing a prebuilt index bundle | `towfikomer/voice-rag-index` |
+| `PORT` | Optional | HTTP port used by the startup script | `8080` |
+| `HOST` | Optional | Host value for local setups | `127.0.0.1` |
 
-### Deploy to Hugging Face Spaces (100% Free):
-1. Create a new Space at [huggingface.co/new-space](https://huggingface.co/new-space) $\rightarrow$ Select **Docker** $\rightarrow$ **Blank**.
-2. Under **Space Settings $\rightarrow$ Variables and secrets**, add `GROQ_API_KEY`.
-3. Push the repository:
-   ```bash
-   git remote add space https://huggingface.co/spaces/YOUR_USERNAME/indic-voice-rag
-   git push space main --force
-   ```
+`bge_m3` resolves to `BAAI/bge-m3` with 1024 dimensions. The `minilm` profile exists as a rollback/benchmark profile, but it is not the production embedding configuration.
 
-### Run Locally with Docker:
-```bash
-docker build -t indic-voice-rag:latest .
-docker run -p 7860:7860 --env-file .env indic-voice-rag:latest
+### Frontend
+
+| Variable | Description | Example |
+| --- | --- | --- |
+| `VITE_API_BASE_URL` | URL of the FastAPI backend | `http://127.0.0.1:8000` |
+
+When omitted, the frontend uses same-origin API calls, which is useful when FastAPI serves the built frontend.
+
+## API reference
+
+Base URL: `http://localhost:8000`
+
+### Health
+
+```http
+GET /api/health
 ```
 
----
+Returns service status, loaded corpus statistics, active embedder, retriever, and index status.
 
-## 🧪 Test & Evaluation Suite
+### Text query
 
-Run the full automated test and benchmark suite:
+```http
+POST /api/query
+Content-Type: application/json
 
-```bash
-# Run all unit & integration tests
-pytest backend/tests/ -v
+{
+  "query": "What is the capital of India?",
+  "provider": "groq",
+  "top_k": 5
+}
+```
 
-# Run the 14-language evaluation benchmark matrix
+Returns the answer, status, refusal reason, groundedness score, retrieved chunks, and telemetry.
+
+### Streaming text query
+
+```http
+POST /api/query/stream
+Content-Type: application/json
+
+{
+  "query": "भारत की राजधानी क्या है?",
+  "top_k": 5
+}
+```
+
+The response is an SSE stream containing status, token, refusal, complete, and error events. The frontend uses this route first and falls back to `/api/query` if streaming fails.
+
+### Speech-to-text
+
+```http
+POST /api/voice/stt
+Content-Type: multipart/form-data
+
+file=<audio file>
+language_code=auto
+```
+
+Returns the transcript, detected language metadata, confidence, and STT latency.
+
+### Full voice processing
+
+```http
+POST /api/voice/process
+Content-Type: multipart/form-data
+
+file=<audio file>
+language_code=auto
+```
+
+Runs STT, RAG, and TTS and returns the answer, audio base64 payload, language metadata, and telemetry.
+
+### Benchmark results
+
+```http
+GET /api/benchmark/results
+```
+
+Aggregates the saved final, retrieval, multilingual, and voice validation reports from `benchmarks/`.
+
+## Architecture and request flow
+
+```text
+Browser microphone
+    │
+    ├── Browser SpeechRecognition (interim UI transcript)
+    └── MediaRecorder audio
+            │
+            ▼
+      POST /api/voice/stt
+            │
+            ▼
+   Sarvam STT or Groq Whisper
+            │
+            ▼
+       Query normalization
+            │
+            ▼
+      Safety guardrail
+            │
+            ▼
+   BGE-M3 query embedding
+            │
+            ├── FAISS-HNSW dense retrieval
+            └── BM25 sparse retrieval
+                    │
+                    ▼
+             RRF hybrid fusion
+                    │
+                    ▼
+       Relevance/evidence gates
+                    │
+                    ▼
+       Groq/Cerebras/Sarvam LLM
+                    │
+                    ▼
+       Groundedness verification
+                    │
+                    ├── SSE answer stream
+                    └── Optional Sarvam TTS
+```
+
+### Guardrail behavior
+
+The orchestrator can short-circuit before an LLM call:
+
+1. Safety guardrail detects unsafe or prompt-injection patterns.
+2. Relevance gate rejects clearly out-of-domain queries.
+3. Evidence sufficiency checks whether retrieval supports answering.
+4. The LLM receives strict grounding instructions.
+5. Groundedness verification checks answer support, numeric consistency, and degeneration.
+
+Refusals are explicit statuses rather than silent empty responses.
+
+## Benchmarks
+
+Benchmark scripts and reports are kept in `benchmarks/`. The UI reads the saved reports through `/api/benchmark/results`.
+
+### Final stratified benchmark
+
+The saved `benchmarks/benchmark_results.json` reports:
+
+| Metric | Result |
+| --- | ---: |
+| Total queries | 135 |
+| Embed + retrieval P70 | 17.25 ms |
+| Harness P50 / P70 / P95 | 31.44 / 46.43 / 47.28 ms |
+| Voice pipeline P50 / P70 | 78.45 / 92.86 ms |
+| Refusal accuracy | 100% |
+| Groundedness rate | 99% |
+
+### Multilingual retrieval matrix
+
+`benchmarks/experiments/phase6d_matrix_results.json` evaluates 60 queries across Hindi, English, Hinglish, Marathi, Tamil, and Bengali:
+
+- Global Recall@5: 90%.
+- Global MRR: 0.8667.
+- Adversarial accuracy: 6/8 (75%).
+- Retrieval P50: 19.47 ms.
+- Retrieval P95: 100.84 ms.
+
+### Run benchmark commands
+
+From the repository root with `.venv` activated:
+
+```powershell
+# Deterministic Phase A pre-LLM baseline
+python benchmarks/phase_a/run_phase_a.py
+
+# Final stratified evaluation
+python benchmarks/final_stratified_benchmark.py
+
+# Multilingual matrix
 python benchmarks/experiments/phase6d_multilingual_matrix.py
 
-# Run the full stratified 135-query benchmark
-python benchmarks/final_stratified_benchmark.py
+# Voice/STT benchmark examples
+python benchmarks/voice/benchmark_stt_realtime.py
+python benchmarks/voice/production_smoke_bge_m3.py
 ```
 
----
+The backend contains test modules under `backend/tests/`; run them with your configured Python test runner when working on backend changes. The frontend currently exposes only `dev`, `build`, and `preview` npm scripts.
 
-## 📄 License
+Phase A is intentionally a pre-LLM benchmark. It asserts that no LLM or TTS call is made and records embedding, vector search, guardrail, and total pre-LLM latency.
 
-This project is licensed under the [MIT License](LICENSE).
+## Troubleshooting
+
+### The backend starts with a starter corpus
+
+Check that the expected index files exist under:
+
+```text
+backend/data/multilingual_index_bundle/
+```
+
+Verify the configured index bundle contains:
+
+```text
+faiss.index
+metadata_light.pkl
+bm25_wand.pkl
+manifest.json
+```
+
+### The frontend cannot reach the API
+
+Set `frontend/.env.local` and restart Vite after changing environment variables.
+
+### Voice input does not transcribe
+
+1. Use localhost; browsers block microphone access on insecure origins.
+2. Grant microphone permission.
+3. Use Chrome or Edge for browser SpeechRecognition support.
+4. Confirm `GROQ_API_KEY` or `SARVAM_API_KEY` is configured for backend STT.
+5. Check `/api/voice/stt` and browser developer-console errors.
+
+### The app returns mock answers
+
+No supported LLM key is configured. Set `GROQ_API_KEY` and `LLM_PROVIDER=groq`, or explicitly use another configured provider.
+
+### Index startup uses too much memory
+
+Set:
+
+```dotenv
+SKIP_PARENT_TEXTS=true
+```
+
+Use a prebuilt index bundle instead of rebuilding from the raw corpus at every startup.
+
+### Benchmark values are missing
+
+Restart the backend after changing benchmark files and verify:
+
+```http
+GET /api/benchmark/results
+```

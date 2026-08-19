@@ -42,12 +42,21 @@ class SarvamVoiceService:
         self,
         audio_bytes: bytes,
         language_code: str = "auto",
+        filename: str = "recording.webm",
+        content_type: str = "audio/webm",
     ) -> Tuple[Dict[str, Any], float]:
         """
         Transcribe voice audio bytes with automatic language detection or explicit locale override.
+        Supports webm, mp4, m4a, wav, and ogg from desktop & mobile web clients.
         Returns (metadata_dict, latency_ms).
         """
         t0 = time.perf_counter()
+
+        # Determine real audio file extension for mobile compatibility (iOS Safari mp4/m4a, Chrome webm)
+        ext = filename.split(".")[-1].lower() if "." in filename else ("mp4" if "mp4" in (content_type or "") else "webm")
+        if ext not in ["wav", "mp3", "mp4", "m4a", "webm", "ogg", "flac"]:
+            ext = "webm"
+        mime = content_type or f"audio/{ext}"
 
         # Offline dummy fallback when no external API key is configured
         if not self.api_key and not self.groq_key:
@@ -66,7 +75,7 @@ class SarvamVoiceService:
         if self.api_key:
             try:
                 headers = {"api-subscription-key": self.api_key}
-                files = {"file": ("audio.wav", audio_bytes, "audio/wav")}
+                files = {"file": (f"audio.{ext}", audio_bytes, mime)}
                 data = {
                     "model": "saaras:v3",
                     "language_code": target_lang,
@@ -100,7 +109,7 @@ class SarvamVoiceService:
         if self.groq_key:
             try:
                 headers = {"Authorization": f"Bearer {self.groq_key}"}
-                files = {"file": ("audio.wav", audio_bytes, "audio/wav")}
+                files = {"file": (f"audio.{ext}", audio_bytes, mime)}
                 data = {
                     "model": "whisper-large-v3-turbo",
                     "response_format": "verbose_json",
@@ -115,6 +124,22 @@ class SarvamVoiceService:
                         data=data,
                         files=files,
                     )
+                if resp.status_code == 200:
+                    res_data = resp.json()
+                    transcript = res_data.get("text", "").strip()
+                    provider_lang = res_data.get("language")
+
+                    if transcript:
+                        latency_ms = (time.perf_counter() - t0) * 1000.0
+                        meta = detect_language_metadata(
+                            transcript,
+                            provider_lang_code=provider_lang,
+                            provider_confidence=0.95,
+                        )
+                        return meta, latency_ms
+            except Exception as e:
+                logger.warning(f"Groq Whisper fallback error: {e}")
+
                 if resp.status_code == 200:
                     res_data = resp.json()
                     transcript = res_data.get("text", "").strip()
@@ -206,9 +231,20 @@ class VoiceRAGPipeline:
         self.orchestrator = orchestrator
         self.voice_service = voice_service or SarvamVoiceService()
 
-    async def transcribe_only(self, audio_bytes: bytes, language_code: str = "auto") -> Dict[str, Any]:
+    async def transcribe_only(
+        self,
+        audio_bytes: bytes,
+        language_code: str = "auto",
+        filename: str = "recording.webm",
+        content_type: str = "audio/webm"
+    ) -> Dict[str, Any]:
         """Transcribe audio and return detected language metadata."""
-        meta, stt_latency = await self.voice_service.transcribe_audio(audio_bytes, language_code=language_code)
+        meta, stt_latency = await self.voice_service.transcribe_audio(
+            audio_bytes,
+            language_code=language_code,
+            filename=filename,
+            content_type=content_type
+        )
         return {
             "text": meta["text"],
             "detected_language": meta["detected_language"],

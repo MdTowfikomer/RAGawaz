@@ -259,8 +259,9 @@ export function useVoiceRAG() {
     recordingStartTimeRef.current = performance.now();
     firstPartialMsRef.current = null;
 
-    // Apply target locale before starting browser SpeechRecognition (if manual mode selected)
-    if (recognitionRef.current && selectedLanguage !== 'auto') {
+    // Start browser recognition for every mode so the transcript remains available
+    // as a fallback when the remote multilingual STT provider is unavailable.
+    if (recognitionRef.current) {
       try {
         const targetLocale = LANGUAGE_LOCALE_MAP[selectedLanguage] || 'hi-IN';
         recognitionRef.current.lang = targetLocale;
@@ -275,7 +276,12 @@ export function useVoiceRAG() {
       navigator.mediaDevices
         .getUserMedia({ audio: true })
         .then((stream) => {
-          const mediaRecorder = new MediaRecorder(stream);
+          const mimeType = MediaRecorder.isTypeSupported('audio/webm;codecs=opus')
+            ? 'audio/webm;codecs=opus'
+            : '';
+          const mediaRecorder = mimeType
+            ? new MediaRecorder(stream, { mimeType })
+            : new MediaRecorder(stream);
           mediaRecorderRef.current = mediaRecorder;
           audioChunksRef.current = [];
 
@@ -307,7 +313,13 @@ export function useVoiceRAG() {
 
     if (mediaRecorderRef.current && mediaRecorderRef.current.state !== 'inactive') {
       mediaRecorderRef.current.onstop = async () => {
-        const audioBlob = new Blob(audioChunksRef.current, { type: 'audio/wav' });
+        const recordingType = mediaRecorderRef.current?.mimeType || 'audio/webm';
+        const audioBlob = new Blob(audioChunksRef.current, { type: recordingType });
+        const fileExtension = recordingType.includes('webm')
+          ? 'webm'
+          : recordingType.includes('mp4')
+            ? 'mp4'
+            : 'wav';
         // Stop all tracks
         mediaRecorderRef.current?.stream?.getTracks().forEach((track) => track.stop());
 
@@ -315,7 +327,7 @@ export function useVoiceRAG() {
           // Multilingual STT & Language Auto-Detection via backend
           try {
             const formData = new FormData();
-            formData.append('file', audioBlob, 'audio.wav');
+            formData.append('file', audioBlob, `recording.${fileExtension}`);
             formData.append('language_code', selectedLanguage);
             const res = await fetch(`${API_BASE}/api/voice/stt`, {
               method: 'POST',
@@ -402,6 +414,7 @@ export function useVoiceRAG() {
     systemHealth,
     benchmarkData,
     toggleRecording,
+    stopRecording,
     executeQuery,
   };
 }

@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
-import { MessageSquare, Sparkles, User, Bot, CheckCircle2, AlertTriangle, ChevronDown, ChevronUp, Send, Globe } from 'lucide-react';
+import { MessageSquare, Sparkles, User, Bot, CheckCircle2, AlertTriangle, ChevronDown, ChevronUp, Send, Mic, X, Globe } from 'lucide-react';
 
 const SAMPLE_QUERIES = [
-  { label: 'Corporation?', text: 'What is a corporation?' },
-  { label: 'Rachel Carson (Hinglish)', text: 'Rachel Carson ne Obligation to Endure kyu likha tha?' },
-  { label: 'वस्तु विनिमय (Barter)', text: 'वस्तु विनिमय में पहला क्या था' },
-  { label: 'महाराष्ट्र राजधानी (मराठी)', text: 'महाराष्ट्र राज्याची राजधानी कोणती आहे?' },
-  { label: 'தலைநகரம் (தமிழ்)', text: 'இந்தியாவின் தலைநகரம் எது?' },
-  { label: 'রাজধানী (বাংলা)', text: 'ভারতের राजधानी কি?' },
+  { label: 'Integrity (English)', text: 'honesty or integrity definition' },
+  { label: 'Vitamin D (हिंदी)', text: 'विटामिन डी की मदद करने वाले खाद्य पदार्थ' },
+  { label: 'Barter System', text: 'what is barter system and its problems' },
+  { label: 'ব্যাটারি (বাংলা)', text: 'ব্যাটারির আয়ু কত?' },
+  { label: 'IRS Records', text: 'how long should you keep IRS records' },
+  { label: 'ವಿಟಮಿನ್ ಡಿ (ಕನ್ನಡ)', text: 'ವಿಟಮಿನ್ ಡಿಗೆ ಸಹಾಯ ಮಾಡುವ ಆಹಾರಗಳು' },
 ];
+
 
 export default function LiveConversation({
   partialTranscript,
@@ -22,6 +23,8 @@ export default function LiveConversation({
   groundednessScore,
   retrievedChunks,
   executeQuery,
+  toggleRecording,
+  stopRecording,
 }) {
   const [inputText, setInputText] = useState('');
   const [showCitations, setShowCitations] = useState(false);
@@ -56,6 +59,21 @@ export default function LiveConversation({
         </span>
       </div>
 
+      {isListening && (
+        <div className="mobile-listening-panel" role="status" aria-live="polite">
+          <div className="mobile-listening-orb">
+            <Mic size={20} />
+          </div>
+          <div>
+            <strong>Listening...</strong>
+            <span>Speak now, then tap the mic to finish</span>
+          </div>
+          <div className="mobile-listening-bars" aria-hidden="true">
+            {[1, 2, 3, 4, 5].map((bar) => <i key={bar} />)}
+          </div>
+        </div>
+      )}
+
       {/* Try Asking Suggestions Cloud */}
       <div className="try-asking-section">
         <div className="try-asking-label">
@@ -83,13 +101,7 @@ export default function LiveConversation({
           <div className="chat-bubble-user">
             <div className="bubble-meta-user">
               <User size={12} />
-              <span>User Query</span>
-              {detectedLanguage && detectedLanguage.label && !isListening && (
-                <span className="detected-pill-light">
-                  <Globe size={9} />
-                  <span>Detected · {detectedLanguage.label}</span>
-                </span>
-              )}
+              <span>User Query</span> 
             </div>
             <div className="bubble-text">
               {finalTranscript && <span>{finalTranscript}</span>}
@@ -116,7 +128,7 @@ export default function LiveConversation({
             <div className="bubble-meta-assistant">
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
                 <Bot size={13} />
-                <span style={{ fontWeight: 600 }}>Indic Voice Agent</span>
+                <span style={{ fontWeight: 600 }}>RAGawaz Agent</span>
               </div>
               {statusResult === 'success' && (
                 <span className="status-badge-pill verified">
@@ -166,7 +178,7 @@ export default function LiveConversation({
             <div className="bubble-meta-assistant">
               <div style={{ display: 'flex', alignItems: 'center', gap: '0.35rem' }}>
                 <Bot size={13} />
-                <span style={{ fontWeight: 600 }}>Indic Voice Agent</span>
+                <span style={{ fontWeight: 600 }}>RAGawaz Agent</span>
               </div>
               <span className="status-badge-pill" style={{ background: 'var(--blue-50)', color: 'var(--blue-500)' }}>
                 <Sparkles size={11} />
@@ -197,6 +209,16 @@ export default function LiveConversation({
           aria-label="Send query"
         >
           <Send size={14} />
+        </button>
+        <button
+          type="button"
+          className={`mobile-voice-btn ${isListening ? 'active' : ''}`}
+          onClick={isListening ? stopRecording : toggleRecording}
+          disabled={isGenerating || ['TRANSCRIBING', 'RETRIEVING'].includes(systemState)}
+          title={isListening ? 'Close listening mode' : 'Start voice input'}
+          aria-label={isListening ? 'Close listening mode' : 'Start voice input'}
+        >
+          {isListening ? <X size={16} /> : <Mic size={16} />}
         </button>
       </form>
     </div>

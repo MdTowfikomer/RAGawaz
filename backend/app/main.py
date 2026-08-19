@@ -304,7 +304,30 @@ def health_check():
     }
 
 
-from fastapi.responses import StreamingResponse
+from fastapi.responses import FileResponse, StreamingResponse
+
+# Mount compiled frontend dist for single-port full-stack production serving
+dist_dir = os.path.join(ROOT_DIR, "frontend", "dist")
+if os.path.exists(dist_dir) and os.path.exists(os.path.join(dist_dir, "index.html")):
+    assets_dir = os.path.join(dist_dir, "assets")
+    if os.path.exists(assets_dir):
+        app.mount("/assets", StaticFiles(directory=assets_dir), name="assets")
+
+    @app.get("/{full_path:path}")
+    async def serve_spa(full_path: str):
+        if full_path.startswith("api/"):
+            raise HTTPException(status_code=404, detail="API endpoint not found")
+
+        file_path = os.path.join(dist_dir, full_path)
+        if os.path.exists(file_path) and os.path.isfile(file_path):
+            return FileResponse(file_path)
+
+        index_path = os.path.join(dist_dir, "index.html")
+        if os.path.exists(index_path):
+            return FileResponse(index_path)
+
+        raise HTTPException(status_code=404, detail="Not found")
+
 
 @app.post("/api/query")
 async def handle_query(req: QueryRequest):
@@ -348,8 +371,14 @@ async def handle_voice_stt(file: UploadFile = File(...), language_code: Optional
         raise HTTPException(status_code=503, detail="Pipeline not initialized")
 
     audio_bytes = await file.read()
-    result = await pipeline_instance.transcribe_only(audio_bytes, language_code=language_code or "auto")
+    result = await pipeline_instance.transcribe_only(
+        audio_bytes,
+        language_code=language_code or "auto",
+        filename=file.filename or "recording.webm",
+        content_type=file.content_type or "audio/webm"
+    )
     return result
+
 
 
 @app.post("/api/voice/process")
@@ -364,15 +393,31 @@ async def handle_voice_upload(file: UploadFile = File(...), language_code: Optio
 
 @app.get("/api/benchmark/results")
 def get_benchmark_results():
-    results_path = os.path.join(ROOT_DIR, "benchmarks", "benchmark_results.json")
-    if os.path.exists(results_path):
-        with open(results_path, "r", encoding="utf-8") as f:
-            return json.load(f)
-    return {"message": "Benchmark not executed yet."}
+    benchmark_dir = os.path.join(ROOT_DIR, "benchmarks")
+    results_path = os.path.join(benchmark_dir, "benchmark_results.json")
+    if not os.path.exists(results_path):
+        return {"message": "Benchmark not executed yet."}
+
+    with open(results_path, "r", encoding="utf-8") as f:
+        summary = json.load(f)
+
+    report_files = {
+        "final_benchmark_report": "final_benchmark_report.json",
+        "retrieval_comparison": os.path.join("experiments", "phase8_9_10_comparison_report.json"),
+        "multilingual_matrix": os.path.join("experiments", "phase6d_matrix_results.json"),
+        "voice_validation": os.path.join("voice", "phase_4e_validation_report.json"),
+    }
+    reports = {}
+    for key, relative_path in report_files.items():
+        report_path = os.path.join(benchmark_dir, relative_path)
+        if os.path.exists(report_path):
+            with open(report_path, "r", encoding="utf-8") as f:
+                reports[key] = json.load(f)
+
+    return {"summary": summary, **reports}
 
 
 # Mount compiled frontend dist for single-port full-stack production serving
 dist_dir = os.path.join(ROOT_DIR, "frontend", "dist")
 if os.path.exists(dist_dir) and os.path.exists(os.path.join(dist_dir, "index.html")):
     app.mount("/", StaticFiles(directory=dist_dir, html=True), name="static")
-

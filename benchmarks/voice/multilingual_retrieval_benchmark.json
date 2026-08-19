@@ -1,0 +1,86 @@
+{
+  "timestamp": 1786736284.655177,
+  "model": "paraphrase-multilingual-MiniLM-L12-v2",
+  "index": "FAISS-HNSW (Flat IP, 384-d)",
+  "top_k": 5,
+  "results": {
+    "hi": {
+      "label": "Hindi (Native)",
+      "recall_at_5": 50.0,
+      "mrr": 0.5,
+      "latency_p50_ms": 64.93404999855557,
+      "latency_p70_ms": 68.8390299994353,
+      "verification_latency_p70_ms": 0.19837999971059617,
+      "text_to_answer_p70_ms": 271.8138000007457,
+      "correctness_rate": 75.0,
+      "false_refusal_rate": 12.5,
+      "hallucination_rate": 12.5,
+      "guardrail_refusal_acc": 0.0
+    },
+    "en": {
+      "label": "English (Cross-Lingual)",
+      "recall_at_5": 50.0,
+      "mrr": 0.5,
+      "latency_p50_ms": 63.16799999876821,
+      "latency_p70_ms": 90.350459999172,
+      "verification_latency_p70_ms": 186.63130000168167,
+      "text_to_answer_p70_ms": 341.8063799977972,
+      "correctness_rate": 100.0,
+      "false_refusal_rate": 0.0,
+      "hallucination_rate": 0.0,
+      "guardrail_refusal_acc": 0.0
+    },
+    "hinglish": {
+      "label": "Hinglish (Code-Mixed)",
+      "recall_at_5": 50.0,
+      "mrr": 0.34375,
+      "latency_p50_ms": 64.11314999968454,
+      "latency_p70_ms": 65.78473999979906,
+      "verification_latency_p70_ms": 211.58030000187864,
+      "text_to_answer_p70_ms": 357.9191400025593,
+      "correctness_rate": 62.5,
+      "false_refusal_rate": 0.0,
+      "hallucination_rate": 37.5,
+      "guardrail_refusal_acc": 0.0
+    },
+    "bn": {
+      "label": "Bengali (Indic Cross-Lingual)",
+      "recall_at_5": 12.5,
+      "mrr": 0.041666666666666664,
+      "latency_p50_ms": 70.99885000025097,
+      "latency_p70_ms": 72.18328000017209,
+      "verification_latency_p70_ms": 0.2538499982620124,
+      "text_to_answer_p70_ms": 191.50731999907293,
+      "correctness_rate": 0.0,
+      "false_refusal_rate": 12.5,
+      "hallucination_rate": 12.5,
+      "guardrail_refusal_acc": 100.0
+    },
+    "mr": {
+      "label": "Marathi (Indic Cross-Lingual)",
+      "recall_at_5": 50.0,
+      "mrr": 0.4375,
+      "latency_p50_ms": 68.00455000120564,
+      "latency_p70_ms": 71.00379000221437,
+      "verification_latency_p70_ms": 0.22917999849596526,
+      "text_to_answer_p70_ms": 188.77813999970385,
+      "correctness_rate": 62.5,
+      "false_refusal_rate": 0.0,
+      "hallucination_rate": 25.0,
+      "guardrail_refusal_acc": 0.0
+    },
+    "ta": {
+      "label": "Tamil (Dravidian Cross-Lingual)",
+      "recall_at_5": 25.0,
+      "mrr": 0.25,
+      "latency_p50_ms": 35.00394999900891,
+      "latency_p70_ms": 67.34207000190507,
+      "verification_latency_p70_ms": 0.2051400009804638,
+      "text_to_answer_p70_ms": 114.34527000019442,
+      "correctness_rate": 0.0,
+      "false_refusal_rate": 25.0,
+      "hallucination_rate": 0.0,
+      "guardrail_refusal_acc": 100.0
+    }
+  }
+}

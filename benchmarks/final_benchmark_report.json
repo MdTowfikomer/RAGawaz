@@ -1,0 +1,54 @@
+{
+  "benchmark_name": "Final 135-Query Stratified Benchmark",
+  "timestamp": "2026-08-14 23:16:23",
+  "total_queries": 135,
+  "spec_compliance": {
+    "embed_retrieval_ms_p70": 17.253980000532465,
+    "embed_retrieval_spec_target_ms": 50.0,
+    "embed_retrieval_pass": true,
+    "harness_ms_p50": 31.439200000022538,
+    "harness_ms_p70": 46.43240000150399,
+    "harness_ms_p95": 47.28278000038699,
+    "harness_ms_max": 47.8460999984236,
+    "harness_spec_target_ms": 200.0,
+    "harness_pass": true,
+    "voice_pipeline_ms_p50": 78.45269999961602,
+    "voice_pipeline_ms_p70": 92.85670000099344,
+    "refusal_accuracy": 1.0,
+    "refusal_accuracy_pass": true,
+    "groundedness_rate": 0.99,
+    "groundedness_pass": true
+  },
+  "category_breakdown": {
+    "canonical_text": {
+      "total": 50,
+      "success": 49,
+      "refusals": 0,
+      "p70_ms": 46.65854000195395
+    },
+    "audio_recorded": {
+      "total": 50,
+      "success": 50,
+      "refusals": 0,
+      "p70_ms": 46.595679999518325
+    },
+    "offtopic": {
+      "total": 15,
+      "success": 0,
+      "refusals": 15,
+      "p70_ms": 17.02701999893179
+    },
+    "insufficient_evidence": {
+      "total": 10,
+      "success": 0,
+      "refusals": 10,
+      "p70_ms": 14.976560000650352
+    },
+    "safety": {
+      "total": 10,
+      "success": 0,
+      "refusals": 10,
+      "p70_ms": 0.0677199994242983
+    }
+  }
+}

@@ -29,7 +29,7 @@ export default function VoiceHero({
       {/* Header with Status Pill */}
       <div style={{ width: '100%', display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', paddingBottom: '0.75rem', borderBottom: '1px solid var(--border-subtle)' }}>
         <span style={{ fontSize: '0.75rem', fontWeight: 700, fontFamily: 'var(--font-mono)', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '0.05em' }}>
-          Indic Voice Agent
+          RAGawaz Agent
         </span>
         <div className={`agent-status-pill ${cfg.class}`}>
           <span className="status-dot" style={{ background: isListening ? 'var(--emerald-500)' : 'currentColor' }}></span>

@@ -28,7 +28,7 @@ export default function Header({
           <Mic size={20} strokeWidth={2.2} />
         </div>
         <div>
-          <h1 className="brand-title">Indic Voice RAG</h1>
+          <h1 className="brand-title">RAGawaz</h1>
           <div className="brand-meta">FAISS-HNSW • {embedderModel} • 5-Stage Guardrails</div>
         </div>
       </div>

@@ -1,0 +1,76 @@
+{
+  "dataset_vector_count": 301108,
+  "total_queries_profiled": 120,
+  "cold_start": {
+    "embedder_init_ms": 10443.9,
+    "faiss_mmap_init_ms": 4224.41,
+    "total_startup_ms": 15271.28,
+    "first_query_embed_ms": 263.55,
+    "first_query_search_ms": 1.07,
+    "first_query_total_ms": 264.62
+  },
+  "warm_latency_metrics": {
+    "query_embedding": {
+      "p50_ms": 10.6,
+      "p95_ms": 14.02,
+      "p99_ms": 15.28,
+      "mean_ms": 11.29,
+      "min_ms": 9.82,
+      "max_ms": 44.96
+    },
+    "faiss_search_top50": {
+      "p50_ms": 0.56,
+      "p95_ms": 1.3,
+      "p99_ms": 1.51,
+      "mean_ms": 0.65,
+      "min_ms": 0.27,
+      "max_ms": 1.54
+    },
+    "total_dense_retrieval": {
+      "p50_ms": 11.26,
+      "p95_ms": 15.04,
+      "p99_ms": 15.94,
+      "mean_ms": 11.94,
+      "min_ms": 10.2,
+      "max_ms": 46.32
+    }
+  },
+  "language_p50_p95": {
+    "en": {
+      "count": 20,
+      "p50_ms": 11.28,
+      "p95_ms": 15.49,
+      "p99_ms": 15.77
+    },
+    "hinglish": {
+      "count": 20,
+      "p50_ms": 11.35,
+      "p95_ms": 14.05,
+      "p99_ms": 14.3
+    },
+    "mr": {
+      "count": 20,
+      "p50_ms": 11.08,
+      "p95_ms": 13.06,
+      "p99_ms": 14.23
+    },
+    "ta": {
+      "count": 20,
+      "p50_ms": 11.16,
+      "p95_ms": 15.05,
+      "p99_ms": 15.6
+    },
+    "bn": {
+      "count": 20,
+      "p50_ms": 11.25,
+      "p95_ms": 12.97,
+      "p99_ms": 13.28
+    },
+    "hi": {
+      "count": 19,
+      "p50_ms": 11.36,
+      "p95_ms": 19.0,
+      "p99_ms": 40.86
+    }
+  }
+}

@@ -2,7 +2,7 @@
 Ticket 7: Groq LLM Provider Implementation.
 
 Uses OpenAI-compatible AsyncOpenAI or httpx client to communicate with Groq's high-speed LPU inference API.
-Default model: 'llama-3.3-70b-versatile' or 'llama-3.1-8b-instant'.
+Default model: 'llama-3.3-70b-versatile' or 'grok-4.1-fast'.
 """
 
 import os
@@ -25,7 +25,7 @@ class GroqLLMProvider:
 
     def __init__(
         self,
-        model_id: str = "openai/gpt-oss-120b",
+        model_id: str = "openai/gpt-oss-20b",
         api_key: Optional[str] = None,
         base_url: str = "https://api.groq.com/openai/v1",
     ):

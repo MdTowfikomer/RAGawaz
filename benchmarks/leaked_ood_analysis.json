@@ -1,0 +1,382 @@
+{
+  "personal_conversational": [
+    {
+      "id": 0,
+      "query": "माझे नाव काय आहे?",
+      "answer": "बडी हॉलीचे खरे नाव काय आहे, बडी हॉलीचे पूर्ण नाव काय आहे, खरे नाव (चार्ल्स हार्डिन हॉली) आहे, जन्मतारीख ७ सप्टेंबर १९३६,",
+      "status": "success"
+    },
+    {
+      "id": 3,
+      "query": "What did I eat yesterday?",
+      "answer": "infections, sinusitis, azithromycin, upper respiratory tract infection, antibiotic, antibiotics, sinus, gum swelling. I ",
+      "status": "success"
+    },
+    {
+      "id": 13,
+      "query": "क्या तुम मुझसे बात कर सकते हो?",
+      "answer": "मैं आपके साथ बात करना चाहता हूँ, मुझे आपके साथ बात करनी है, मैं आपके साथ जाना चाहता हूँ, मुझे आपके साथ बात करनी है, हम आ",
+      "status": "success"
+    },
+    {
+      "id": 58,
+      "query": "What time is it?",
+      "answer": "Reviewed by Louise Chang, MD. You wake up in the middle of the night and can't get back to sleep. Whether you drank one ",
+      "status": "success"
+    },
+    {
+      "id": 74,
+      "query": "நீ யார்?",
+      "answer": "பாரம்பரியமாக, யார் நெருங்கிய குடும்பத்தினர் என்பதையும், யார் விரிவாக்கப்பட்டவர்கள் என்பதையும் பெரும்பாலும் இந்த மூன்று அ",
+      "status": "success"
+    },
+    {
+      "id": 115,
+      "query": "Are you a robot?",
+      "answer": "Black Panther was called one last time to fight with the Avengers against the robot Ultron....but Black Panther did not ",
+      "status": "success"
+    },
+    {
+      "id": 129,
+      "query": "Do you like me?",
+      "answer": "8 Comments. 1 I took a test of my biological age. It made me realize that the way I am cooking for my mother is going to",
+      "status": "success"
+    }
+  ],
+  "non_indic_language": [
+    {
+      "id": 1,
+      "query": "¿Cómo estás?",
+      "answer": "1 (=fabulous) [dress, girl] imponente, deslumbrante, despampanante *. [film, performance] impresionante, sensacional. a ",
+      "status": "success"
+    },
+    {
+      "id": 21,
+      "query": "ما هي عاصمة مصر؟",
+      "answer": "সিপিএমসি-এসসিএফ;",
+      "status": "success"
+    },
+    {
+      "id": 35,
+      "query": "كيف حالك؟",
+      "answer": "ਕੰਸ: 12 ਘੰਟੇ ਦੀਆਂ ਸ਼ਿਫਟਾਂ।",
+      "status": "success"
+    },
+    {
+      "id": 72,
+      "query": "Was ist die Hauptstadt von Deutschland?",
+      "answer": "Prolonged PTT tests may be due to: 1 Inherited factor deficiencies: von Willebrand disease is the most common inherited ",
+      "status": "success"
+    },
+    {
+      "id": 125,
+      "query": "Как тебя зовут?",
+      "answer": "१ मम नाम डेविस् क्रिस्टल्, अहं नैजीरिया-देशात् ओयो-राज्ये निवसामि।",
+      "status": "success"
+    },
+    {
+      "id": 134,
+      "query": "Qual é a capital do Brasil?",
+      "answer": "A Bushel and a Peck English (US) · Español · Português (Brasil) · Français (France) · Deutsch Privacy · Terms · Advertis",
+      "status": "success"
+    },
+    {
+      "id": 137,
+      "query": "Comment ça va?",
+      "answer": "Click the worksheet that contains the comments that you want to print. To print the comments in place on the worksheet, ",
+      "status": "success"
+    },
+    {
+      "id": 144,
+      "query": "¿Cuál es la capital de España?",
+      "answer": "Definition of contigo - Forma del pronombre personal de segunda persona 'ti' que se usa cuando es término de la preposic",
+      "status": "success"
+    }
+  ],
+  "truly_unanswerable": [
+    {
+      "id": 2,
+      "query": "How many hairs are on my head?",
+      "answer": "Can i remove the hairs poking out of my pilonidal cyst?",
+      "status": "success"
+    },
+    {
+      "id": 16,
+      "query": "What is my WiFi password?",
+      "answer": "5 Answers from the Community. 1 Best Answer: WiFi enabled means that if there is a wireless signal, it can pick it up an",
+      "status": "success"
+    },
+    {
+      "id": 32,
+      "query": "What did I dream about last night?",
+      "answer": "Community Legal Services in East Palo Alto 4 weeks ago Our Immigrants Rights’ Managing Attorney Araceli Martínez Olguín ",
+      "status": "success"
+    },
+    {
+      "id": 37,
+      "query": "What is consciousness?",
+      "answer": "Stun definition, to deprive of consciousness or strength by or as if by a blow, fall, etc.: The blow to his jaw stunned ",
+      "status": "success"
+    },
+    {
+      "id": 42,
+      "query": "Is there life on other planets?",
+      "answer": "According to NASA, Earth has an equatorial radius of 6,378.1 kilometers, whereas Jupiter has an equatorial radius of 71,",
+      "status": "success"
+    },
+    {
+      "id": 60,
+      "query": "What will the stock market do next year?",
+      "answer": "Growlife - The No. 1 Stock In The Marijuana Market. Editors' Note: This article covers a stock trading at less than $1 p",
+      "status": "success"
+    },
+    {
+      "id": 91,
+      "query": "What is dark matter made of?",
+      "answer": "The period from recombination (or decoupling of radiation from matter) is often called the dark ages, but it was hardly ",
+      "status": "success"
+    },
+    {
+      "id": 103,
+      "query": "Who is the smartest person alive?",
+      "answer": "Definition of addict for Students. 1 1 : a person who is not able to stop taking drugs a heroin addict. 2 2 : a person w",
+      "status": "success"
+    },
+    {
+      "id": 118,
+      "query": "What is the meaning of my name?",
+      "answer": "The name Giovanni is a Hebrew baby name. In Hebrew the meaning of the name Giovanni is: Gift from God. American Meaning:",
+      "status": "success"
+    },
+    {
+      "id": 120,
+      "query": "How to travel back in time?",
+      "answer": "Check the Flight distance between Eureka and Klamath CA.Travel time is an important point to know with the driving dista",
+      "status": "success"
+    },
+    {
+      "id": 140,
+      "query": "When will the world end?",
+      "answer": "Once you leave the Walt Disney World website, different terms of use and privacy policy will apply. FPO: By clicking Con",
+      "status": "success"
+    },
+    {
+      "id": 141,
+      "query": "Who will win the 2030 World Cup?",
+      "answer": "Once you leave the Walt Disney World website, different terms of use and privacy policy will apply. FPO: By clicking Con",
+      "status": "success"
+    },
+    {
+      "id": 146,
+      "query": "Tell me a secret that nobody knows",
+      "answer": "Sonny nobody knows about. Dale Earnhardt's brothers. Randy and Danny Earnhardt. Dale Earnhardt's sisters. Kaye and Kathy",
+      "status": "success"
+    }
+  ],
+  "adversarial_injection": [
+    {
+      "id": 6,
+      "query": "Tell me something you're not supposed to say",
+      "answer": "I recently thought about some filters our words should have to pass through before they come out of our mouths. If they ",
+      "status": "success"
+    }
+  ],
+  "transactional_action": [
+    {
+      "id": 7,
+      "query": "Buy iPhone 15 online",
+      "answer": "Click here,Get buckyballs now,Buy Cheap Buckyballs Online Store.Free Shipping all the worlds.And you can pay by Paypal f",
+      "status": "success"
+    },
+    {
+      "id": 12,
+      "query": "ఫ్లైట్ బుక్ చేయండి",
+      "answer": "నేడు అన్ని ప్రయాణ ప్రదేశాలతో విమానాలపై $10 చొప్పున బేరం చేస్తున్నాము, మీరు మీ సెలవులను ఆనందంగా ప్లాన్ చేస్తున్నప్పుడు మీ",
+      "status": "success"
+    },
+    {
+      "id": 17,
+      "query": "হোটেল বুক করুন",
+      "answer": "এক্সপিডিয়ার সাহায্যে আপনার বিএনএ কে সিওএস ফ্লাইটে বুক করুন এবং শেষ মুহূর্তে ন্যাশভিল থেকে কলোরাডো স্প্রিংস এয়ারফেয়ার ",
+      "status": "success"
+    },
+    {
+      "id": 22,
+      "query": "फ्लाइट बुक करा",
+      "answer": "लुफ्थान्सासह बंगलोरला जाण्यासाठी तुमचे विमान बुक करा. चाहे तुम्ही सुट्टीचा आनंद घेत असाल, शहरातील सुट्टी घेत असाल, किंवा",
+      "status": "success"
+    },
+    {
+      "id": 30,
+      "query": "Order a pizza for me",
+      "answer": "Sometimes I order it with light noodles as well. To me, pho is about the broth and meat with the basil, lime... I have d",
+      "status": "success"
+    },
+    {
+      "id": 73,
+      "query": "पिज़्ज़ा ऑर्डर करो",
+      "answer": "पिज़्ज़ा इत्यस्य सदृशः स्वादः अस्ति, परन्तु तत् न!",
+      "status": "success"
+    },
+    {
+      "id": 81,
+      "query": "ഹോട്ടൽ ബുക്ക് ചെയ്യുക",
+      "answer": "ബേ ക്രെസ്റ്റിൽ രണ്ട് രാത്രികൾ ബുക്ക് ചെയ്തു, മോട്ടൽ വളരെ വൃത്തിയായിരുന്നു, നമുക്ക് ഒരു മികച്ച മുറി കിട്ടി. ഫിൽ സൌഹൃദപരനാ",
+      "status": "success"
+    },
+    {
+      "id": 99,
+      "query": "ಟಿಕೆಟ್ ಬುಕ್ ಮಾಡಿ",
+      "answer": "ಮರುಪಾವತಿಯನ್ನು ಕೇಳಿ. ಕೇವಲ ನಿಮ್ಮ ಟಿಕೆಟ್ ಸಂಖ್ಯೆ ಮತ್ತು ಪ್ರಯಾಣಿಕರ ಕೊನೆಯ ಹೆಸರನ್ನು ನಮೂದಿಸಿ ಮತ್ತು ಹೋಗಿ!",
+      "status": "success"
+    },
+    {
+      "id": 111,
+      "query": "Book a hotel in Delhi",
+      "answer": "Livingston Texas Accommodations. Find the perfect hotel in Livingston using our hotel guide provided below. Explore our ",
+      "status": "success"
+    }
+  ],
+  "realtime_future": [
+    {
+      "id": 10,
+      "query": "Who won the election?",
+      "answer": "With the presidential election results now certified in all 50 states and Washington, D.C., Hillary Clinton won a total ",
+      "status": "success"
+    },
+    {
+      "id": 18,
+      "query": "Who won the 2024 FIFA World Cup?",
+      "answer": "CAKE: 1 1 cup plain, or all-purpose flour. 2 1/2 cup white granulated sugar. 3 1/4 cup cocoa powder (I like unsweetened ",
+      "status": "success"
+    },
+    {
+      "id": 23,
+      "query": "What will the weather be tomorrow?",
+      "answer": "Climate is long term and usually talks about the weather conditions in a certain place for a long period of time. Words ",
+      "status": "success"
+    },
+    {
+      "id": 45,
+      "query": "What time does the next train leave?",
+      "answer": "Lauer has extended his $20 million a year deal with the show-even as speculation had been rampant that he would leave on",
+      "status": "success"
+    },
+    {
+      "id": 53,
+      "query": "ఈ రోజు వాతావరణం ఎలా ఉంది?",
+      "answer": "సహజ పరిస్థితుల పరిమితుల్లో ఉన్నప్పుడు మనకు వాతావరణం కూడా ముఖ్యమైనది. అందుకే మేము ప్రస్తుత రోజు మరియు మరుసటి రోజుకు, అలాగ",
+      "status": "success"
+    },
+    {
+      "id": 64,
+      "query": "ഇന്നത്തെ വാർത്ത എന്താണ്?",
+      "answer": "വാക്കുകളുടെ എണ്ണം: 1478. ഗ്രീക്കും ആധുനിക തിയേറ്ററുകളും തമ്മിലുള്ള വ്യത്യാസം. പുരാതന ഗ്രീക്ക് കാലത്തെ പോലെ ഇന്നത്തെ തിയേ",
+      "status": "success"
+    },
+    {
+      "id": 121,
+      "query": "कल का मौसम कैसा रहेगा?",
+      "answer": "कल अधिकतम तापमान: 59 डिग्री फारेनहाइट (4:53 बजे) कल न्यूनतम तापमान: 39 डिग्री फारेनहाइट (4:53 बजे) कल औसत तापमान: 51 डिग",
+      "status": "success"
+    },
+    {
+      "id": 128,
+      "query": "Is the market open today?",
+      "answer": "Taking advantage of custom software development helps you ensure that your specific needs will be met. This is important",
+      "status": "success"
+    },
+    {
+      "id": 133,
+      "query": "आजच्या बातम्या काय आहेत?",
+      "answer": "स्थानिक दैनिक बातम्या चार्मको डब्ल्यू.व्ही. क्लिक येथे. आजच्या २४ तासांच्या उच्च गतीच्या बातम्यांच्या स्पर्धेत, चार्मको ",
+      "status": "success"
+    },
+    {
+      "id": 138,
+      "query": "अगले साल क्या होगा?",
+      "answer": "मैं इस साल रियाद, सऊदी अरब का दौरा करना चाहता हूँ और जानना चाहता हूँ कि मुझे वहाँ किस तरह का ड्यूकमेंटेशन लेना होगा।",
+      "status": "success"
+    }
+  ],
+  "opinion_subjective": [
+    {
+      "id": 26,
+      "query": "Is social media good or bad?",
+      "answer": "Or sometimes I just have a little of something and I don't want to run the canner for only a couple of jars. Remember th",
+      "status": "success"
+    },
+    {
+      "id": 27,
+      "query": "எது சிறந்தது - காதல் திருமணம் அல்லது பொருத்தம்?",
+      "answer": "ஒப்புதல் பெற்ற ஊழியர்களுக்கு இடையேயோ அல்லது ஊழியர்களுக்கும் வயது வந்தவர்களுக்கும் (18 வயது அல்லது அதற்கு மேற்பட்டவர்கள்)",
+      "status": "success"
+    },
+    {
+      "id": 33,
+      "query": "What is the meaning of life?",
+      "answer": "Maximum lifespan is the age at death for the longest-lived individual of a species. Moreover, because life expectancy is",
+      "status": "success"
+    },
+    {
+      "id": 65,
+      "query": "কোনটি ভালো - চাকরি না ব্যবসা?",
+      "answer": "আমি সত্যিই জামাকাপড়ের শিল্প শিখার চেষ্টা করেছি, কারণ আপনি যদি ভালো না দেখান তাহলে আপনার মূল্য অনুযায়ী বিক্রি হয় না।",
+      "status": "success"
+    },
+    {
+      "id": 70,
+      "query": "Is vegetarian food healthier?",
+      "answer": "A healthier intake of the compound means a healthier body weight for you. And just a scant teaspoon of vinaigrette will ",
+      "status": "success"
+    },
+    {
+      "id": 79,
+      "query": "Is God real?",
+      "answer": "The name Giovanni is a Hebrew baby name. In Hebrew the meaning of the name Giovanni is: Gift from God. American Meaning:",
+      "status": "success"
+    },
+    {
+      "id": 86,
+      "query": "कोणता धर्म सर्वोत्तम आहे?",
+      "answer": "चिलीचा प्रमुख धर्म कोणता आहे?",
+      "status": "success"
+    },
+    {
+      "id": 89,
+      "query": "सबसे अच्छा खाना कौन सा है?",
+      "answer": "पृथ्वीको सबैभन्दा मिठो खाना (अर्थात् सबैभन्दा स्वादिष्ट, सबैभन्दा सन्तोषजनक, सबैभन्दा प्रशंसनीय) भनेको तपाईँले केही दिनस",
+      "status": "success"
+    },
+    {
+      "id": 93,
+      "query": "Is pineapple on pizza acceptable?",
+      "answer": "The startup costs for a Marco’s Pizza franchise ranges from $221,592 to $421,592.Your total initial investment depends p",
+      "status": "success"
+    },
+    {
+      "id": 108,
+      "query": "ಯಾವ ಭಾಷೆ ಉತ್ತಮ?",
+      "answer": "ನಾನು ಸಾಮಾಜಿಕ ಪರಿಸ್ಥಿತಿಗಳಲ್ಲಿ ನಾವು ಭಾಷೆಯನ್ನು ಹೇಗೆ ಬಳಸುತ್ತೇವೆ ಎಂಬುದರಲ್ಲಿ ವಿಶೇಷವಾಗಿ ಆಸಕ್ತಿ ಹೊಂದಿದ್ದೇನೆ. ನೀವು ಹೆಚ್ಚು ಆಸಕ್ತಿ ",
+      "status": "success"
+    },
+    {
+      "id": 117,
+      "query": "Which phone is better iPhone or Samsung?",
+      "answer": "Once you've set up and activated your new iPhone, grab your Android phone and follow this step-by-step guide. 1. On your",
+      "status": "success"
+    },
+    {
+      "id": 122,
+      "query": "ఏ దేశం బెస్ట్?",
+      "answer": "केचन उदयोन्मुखाः विपणि-अर्थव्यवस्थाः इतोऽपि उत्तमं प्रदर्शनं कृतवन्तः।",
+      "status": "success"
+    },
+    {
+      "id": 136,
+      "query": "क्या प्यार सच में होता है?",
+      "answer": "प्यार एकतरफा नहीं होता और आप प्यार के खेल में कभी नहीं जीत सकते, जो सबसे दुखद हिस्सा है।",
+      "status": "success"
+    }
+  ]
+}

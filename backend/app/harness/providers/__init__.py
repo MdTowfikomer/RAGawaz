@@ -13,7 +13,7 @@ def get_llm_provider(name: str = "mock", model_id: Optional[str] = None, **kwarg
     """Factory to get configured LLM provider."""
     name_clean = name.lower().strip()
     if name_clean == "groq":
-        return GroqLLMProvider(model_id=model_id or "openai/gpt-oss-120b", **kwargs)
+        return GroqLLMProvider(model_id=model_id or "openai/gpt-oss-20b", **kwargs)
     elif name_clean == "cerebras":
         return CerebrasLLMProvider(model_id=model_id or "llama3.1-8b", **kwargs)
     elif name_clean == "sarvam":

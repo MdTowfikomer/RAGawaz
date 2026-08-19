@@ -39,7 +39,7 @@ def download_index():
 
 if __name__ == "__main__":
     print("=" * 50)
-    print("Indic Voice RAG — Starting up")
+    print("RAGawaz — Starting up")
     print("=" * 50)
 
     # Step 1: Download index

@@ -1,0 +1,125 @@
+{
+  "dataset_vectors": 301108,
+  "benchmark_queries_count": 300,
+  "pipelines_comparison": {
+    "Dense_Only": {
+      "recall_at_1": 81.33,
+      "recall_at_5": 88.67,
+      "recall_at_10": 89.33,
+      "mrr": 0.8421,
+      "p50_latency_ms": 14.21,
+      "p95_latency_ms": 23.45,
+      "p99_latency_ms": 31.02,
+      "language_recall_at_5": {
+        "hi": 88.0,
+        "en": 90.0,
+        "hinglish": 78.0,
+        "mr": 94.0,
+        "ta": 88.0,
+        "bn": 94.0
+      }
+    },
+    "Hybrid_RRF": {
+      "recall_at_1": 82.0,
+      "recall_at_5": 90.0,
+      "recall_at_10": 92.0,
+      "mrr": 0.8577,
+      "p50_latency_ms": 17.93,
+      "p95_latency_ms": 29.52,
+      "p99_latency_ms": 39.97,
+      "language_recall_at_5": {
+        "hi": 88.0,
+        "en": 92.0,
+        "hinglish": 80.0,
+        "mr": 94.0,
+        "ta": 92.0,
+        "bn": 94.0
+      }
+    },
+    "Hybrid_RRF_Reranker": {
+      "recall_at_1": 83.33,
+      "recall_at_5": 88.0,
+      "recall_at_10": 92.0,
+      "mrr": 0.8567,
+      "p50_latency_ms": 56.58,
+      "p95_latency_ms": 75.64,
+      "p99_latency_ms": 92.44,
+      "language_recall_at_5": {
+        "hi": 86.0,
+        "en": 92.0,
+        "hinglish": 84.0,
+        "mr": 88.0,
+        "ta": 92.0,
+        "bn": 86.0
+      }
+    }
+  },
+  "calibration_grid": [
+    {
+      "threshold": 0.35,
+      "true_accepts": 6,
+      "false_accepts": 9,
+      "true_refusals": 0,
+      "false_refusals": 0,
+      "accuracy_pct": 40.0,
+      "false_accept_rate_pct": 100.0
+    },
+    {
+      "threshold": 0.4,
+      "true_accepts": 6,
+      "false_accepts": 9,
+      "true_refusals": 0,
+      "false_refusals": 0,
+      "accuracy_pct": 40.0,
+      "false_accept_rate_pct": 100.0
+    },
+    {
+      "threshold": 0.45,
+      "true_accepts": 5,
+      "false_accepts": 8,
+      "true_refusals": 1,
+      "false_refusals": 1,
+      "accuracy_pct": 40.0,
+      "false_accept_rate_pct": 88.9
+    },
+    {
+      "threshold": 0.5,
+      "true_accepts": 5,
+      "false_accepts": 5,
+      "true_refusals": 4,
+      "false_refusals": 1,
+      "accuracy_pct": 60.0,
+      "false_accept_rate_pct": 55.6
+    },
+    {
+      "threshold": 0.55,
+      "true_accepts": 5,
+      "false_accepts": 5,
+      "true_refusals": 4,
+      "false_refusals": 1,
+      "accuracy_pct": 60.0,
+      "false_accept_rate_pct": 55.6
+    },
+    {
+      "threshold": 0.6,
+      "true_accepts": 3,
+      "false_accepts": 2,
+      "true_refusals": 7,
+      "false_refusals": 3,
+      "accuracy_pct": 66.7,
+      "false_accept_rate_pct": 22.2
+    }
+  ],
+  "recommended_evidence_gate_config": {
+    "optimal_composite_threshold": 0.35,
+    "calibration_performance": {
+      "threshold": 0.35,
+      "true_accepts": 6,
+      "false_accepts": 9,
+      "true_refusals": 0,
+      "false_refusals": 0,
+      "accuracy_pct": 40.0,
+      "false_accept_rate_pct": 100.0
+    }
+  }
+}

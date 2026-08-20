@@ -218,26 +218,27 @@ class InsufficientEvidenceChecker:
                     ctx_script = detect_script(combined_context)
 
                     if q_script == ctx_script:
-                        # Same-script: require at least 20% keyword coverage OR moderate semantic confidence (>= 0.46)
-                        if coverage_ratio < 0.20 and top_score < 0.46:
+                        # Same-script: require at least 30% keyword coverage OR moderate semantic confidence (>= 0.48)
+                        if coverage_ratio < 0.30 and top_score < 0.48:
                             self.last_diagnostics = {"entity_match": "FAIL", "evidence_status": "INSUFFICIENT", "coverage": f"{coverage_ratio:.2f}"}
                             return False, refusal_msg
                         else:
                             self.last_diagnostics = {"entity_match": "PASS", "evidence_status": "SUFFICIENT"}
                     else:
                         # Cross-script (e.g. Indic query vs English corpus): rely on semantic retrieval confidence
-                        if top_score < 0.44:
+                        if top_score < 0.48:
                             self.last_diagnostics = {"entity_match": "FAIL", "evidence_status": "INSUFFICIENT", "top_score": f"{top_score:.2f}"}
                             return False, refusal_msg
                         else:
                             self.last_diagnostics = {"entity_match": "PASS", "evidence_status": "SUFFICIENT"}
                 else:
                     # Generic query without specific content keywords: require base score
-                    if top_score < 0.44:
+                    if top_score < 0.48:
                         self.last_diagnostics = {"entity_match": "FAIL", "evidence_status": "INSUFFICIENT"}
                         return False, refusal_msg
                     self.last_diagnostics = {"entity_match": "N/A", "evidence_status": "SUFFICIENT"}
 
         return True, None
+
 
 

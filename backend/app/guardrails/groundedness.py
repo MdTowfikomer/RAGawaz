@@ -46,7 +46,12 @@ REFUSAL_PATTERNS = [
     r"the\s+provided\s+context\s+does\s+not\s+contain",
     r"does\s+not\s+mention\s+(your|the)\s+name",
     r"cannot\s+find\s+.*information",
+    r"is\s+not\s+available\s+in\s+my\s+knowledge\s+base",
+    r"cannot\s+find\s+sufficient\s+evidence",
+    r"no\s+information\s+available",
+    r"does\s+not\s+contain\s+information",
 ]
+
 REFUSAL_REGEX = re.compile("|".join(REFUSAL_PATTERNS), re.IGNORECASE)
 
 

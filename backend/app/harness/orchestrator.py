@@ -257,11 +257,12 @@ class RAGOrchestrator:
             f"STRICT RULES:\n"
             f"1. Read ALL context passages. Choose the one that BEST answers the specific question.\n"
             f"2. Start your response with the DIRECT answer to the question.\n"
-            f"3. Do NOT copy-paste the first passage blindly. Pick the MOST RELEVANT one.\n"
+            f"3. Do NOT copy-paste unrelated text (e.g. accounting 'capital assets' when asked for a capital city). Pick ONLY context containing the direct answer.\n"
             f"4. Keep it to 1-2 sentences. Synthesize, don't dump raw text.\n"
-            f"5. If NONE of the passages actually answer the question, say: 'This information is not available in my knowledge base.'\n"
+            f"5. CRITICAL SAFETY RULE: If NONE of the passages actually contain the direct answer to the question, state clearly: 'I cannot find sufficient evidence in the retrieved knowledge base to answer your question.'\n"
             f"6. No invented facts, numbers, or names not present in the Context."
         )
+
 
         prompt = (
             f"Context:\n{context_str}\n\n"

@@ -213,6 +213,22 @@ class InsufficientEvidenceChecker:
                     matched_kws = [kw for kw in specific_keywords if kw.lower() in combined_lower]
                     coverage_ratio = len(matched_kws) / len(specific_keywords)
 
+                    # 3c. Single-Chunk Co-occurrence Check:
+                    # Prevents false-positives where words are scattered across completely unrelated passages
+                    # (e.g. 'President' in chunk 1, 'India' in chunk 3). At least 1 single chunk must contain >= 60% of query keywords.
+                    if len(specific_keywords) >= 2:
+                        max_chunk_coverage = 0.0
+                        for chunk in context_chunks:
+                            chunk_lower = chunk.lower()
+                            chunk_matches = sum(1 for kw in specific_keywords if kw.lower() in chunk_lower)
+                            cov = chunk_matches / len(specific_keywords)
+                            if cov > max_chunk_coverage:
+                                max_chunk_coverage = cov
+
+                        if max_chunk_coverage < 0.60:
+                            self.last_diagnostics = {"entity_match": "FAIL", "evidence_status": "INSUFFICIENT", "reason": "scattered_keywords"}
+                            return False, refusal_msg
+
                     # Check script alignment
                     q_script = detect_script(query)
                     ctx_script = detect_script(combined_context)
@@ -237,6 +253,7 @@ class InsufficientEvidenceChecker:
                         self.last_diagnostics = {"entity_match": "FAIL", "evidence_status": "INSUFFICIENT"}
                         return False, refusal_msg
                     self.last_diagnostics = {"entity_match": "N/A", "evidence_status": "SUFFICIENT"}
+
 
         return True, None
 
